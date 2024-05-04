@@ -1,6 +1,6 @@
 from nltk.tokenize import sent_tokenize
 from heapq import nlargest
-from TF_IDF.services import *
+from tf_idf.services import *
 
 
 

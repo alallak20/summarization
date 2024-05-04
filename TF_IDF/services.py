@@ -1,44 +1,45 @@
 import math
 
 # Tokenize and create a vocabulary
-def tokenize_and_create_vocabulary(documents):
+# every sentence into words as a list & a vocabulary containing all words 
+def tokenize_and_create_vocabulary(sentences):
     # Initialize an empty list to store tokenized documents
-    tokenized_documents = []
-    # Initialize an empty set to store unique words in the vocabulary
+    tokenized_sentences = []
+    # Initialize an empty set to store ALL unique words in the vocabulary
     vocabulary = set()
 
-    # Loop through each document
-    for doc in documents:
+    # Loop through each sentence
+    for sentence in sentences:
         # Tokenize the document into individual words and convert them to lowercase
-        tokenized_doc = doc.lower().split()
+        tokenized_sentence = sentence.lower().split()
         # Add the tokenized document to the list of tokenized documents
-        tokenized_documents.append(tokenized_doc)
+        tokenized_sentences.append(tokenized_sentence)
         # Add unique words from the tokenized document to the vocabulary
-        for word in tokenized_doc:
+        for word in tokenized_sentence:
             vocabulary.add(word)
 
     # Return the list of tokenized documents and the vocabulary
-    return tokenized_documents, vocabulary
+    return tokenized_sentences, vocabulary
 
 # Calculate TF (Term Frequency)
-def calculate_tf(tokenized_documents, vocabulary):
+def calculate_tf(tokenized_sentences, vocabulary):
     # Initialize an empty list to store TF matrices for each document
     tf_matrix = []
 
     # Loop through each document
-    for doc in tokenized_documents:
+    for sentence in tokenized_sentences:
         # Initialize an empty dictionary to store TF values for each word in the vocabulary
-        tf_doc = {}
+        tf_sentences = {}
         # Calculate the length of the document
-        doc_length = len(doc)
+        sentences_length = len(sentence)
 
         # Loop through each word in the vocabulary
         for word in vocabulary:
             # Calculate the term frequency of the word in the document
-            tf_doc[word] = doc.count(word) / doc_length
+            tf_sentences[word] = sentence.count(word) / sentences_length
 
         # Add the TF dictionary for the document to the TF matrix
-        tf_matrix.append(tf_doc)
+        tf_matrix.append(tf_sentences)
 
     # Return the TF matrix
     return tf_matrix
@@ -53,9 +54,13 @@ def calculate_idf(tokenized_documents, vocabulary):
     # Loop through each word in the vocabulary
     for word in vocabulary:
         # Count the number of documents containing the word
-        count = sum(1 for doc in tokenized_documents if word in doc)
+        count = 0
+        for doc in tokenized_documents:
+            if word in doc:
+                count += 1
+
         # Calculate IDF for the word
-        idf_dict[word] = math.log(num_docs / count)
+        idf_dict[word] = math.log(num_docs / (count + 1))
 
     # Return the IDF dictionary
     return idf_dict

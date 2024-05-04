@@ -1,6 +1,6 @@
 import os
-from TF_IDF.summary import generate_summary_manual_TF_IDF
-from Frequency_based.summary import generate_summary_F_Based
+from tf_idf.summary import generate_summary_manual_TF_IDF
+from frequency_based.summary import generate_summary_F_Based
 
 
 # Path to the folder containing input documents
