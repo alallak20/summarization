@@ -46,14 +46,9 @@ for ref_summary in reference_summaries:
         for metric, values in score.items():
             print(f"'{metric}': {values}")
 
-print("""
+print("-------------------------------------------------------------")
 
-
-
-""")
-
-print("ROUGE scores for TF IDF:")
-# for ref_summary in reference_summaries:
+print("\n", "ROUGE scores for TF IDF:")
 
 for ref_summary in reference_summaries:
     scores = rouge.get_scores(tf_idf_summary, ref_summary)
